@@ -9,6 +9,10 @@ export interface BotConfig {
   password?: string;
   auth: AuthType;
   version?: string;
+  telegram?: {
+    botToken: string;
+    chatId: string;
+  };
 }
 
 export function getConfig(): BotConfig {
@@ -22,5 +26,15 @@ export function getConfig(): BotConfig {
     auth = authEnv;
   }
   const version = process.env.MC_VERSION;
-  return { host, port, username, password, auth, version };
+  
+  // Telegram configuration
+  const telegramBotToken = process.env.TG_BOT_TOKEN;
+  const telegramChatId = process.env.TG_CHAT_ID;
+  
+  const telegram = telegramBotToken && telegramChatId ? {
+    botToken: telegramBotToken,
+    chatId: telegramChatId
+  } : undefined;
+  
+  return { host, port, username, password, auth, version, telegram };
 } 
