@@ -34,7 +34,7 @@ export class TelegramService {
         // Send message to Minecraft
         if (this.minecraftBot && messageText) {
           this.minecraftBot.chat(messageText);
-          console.log(`[Telegram->MC] ${senderName}: ${messageText}`);
+          // console.log(`[Telegram->MC] ${senderName}: ${messageText}`);
         }
         
         // React to show message was received
@@ -44,7 +44,7 @@ export class TelegramService {
 
     // Handle errors
     this.telegramBot.catch((err) => {
-      console.error('[Telegram Bot] Error:', err);
+      // console.error('[Telegram Bot] Error:', err);
     });
   }
 
@@ -55,21 +55,21 @@ export class TelegramService {
   public async start() {
     try {
       await this.telegramBot.start();
-      console.log('[Telegram Bot] Started successfully');
+      // console.log('[Telegram Bot] Started successfully');
       
       // Send startup message
       await this.sendMessage('🤖 Minecraft bot connected to Telegram!\n\nReply to this message to send commands to Minecraft.');
     } catch (error) {
-      console.error('[Telegram Bot] Failed to start:', error);
+      // console.error('[Telegram Bot] Failed to start:', error);
     }
   }
 
   public async stop() {
     try {
       await this.telegramBot.stop();
-      console.log('[Telegram Bot] Stopped');
+      // console.log('[Telegram Bot] Stopped');
     } catch (error) {
-      console.error('[Telegram Bot] Error stopping:', error);
+      // console.error('[Telegram Bot] Error stopping:', error);
     }
   }
 
@@ -79,7 +79,7 @@ export class TelegramService {
         parse_mode: 'Markdown'
       });
     } catch (error) {
-      console.error('[Telegram Bot] Failed to send message:', error);
+      // console.error('[Telegram Bot] Failed to send message:', error);
     }
   }
 

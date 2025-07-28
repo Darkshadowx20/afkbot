@@ -22,12 +22,12 @@ export function createBot(config: BotConfig): Bot {
       telegramService.setMinecraftBot(bot);
       telegramService.start();
     } catch (error) {
-      console.error('[Bot] Failed to initialize Telegram service:', error);
+      // console.error('[Bot] Failed to initialize Telegram service:', error);
     }
   }
 
   bot.on('login', () => {
-    console.log(`[Bot] Logged in as ${bot.username}`);
+    // console.log(`[Bot] Logged in as ${bot.username}`);
     bot.chat('/register password password'); // For cracked servers, may need to register
     bot.chat('/login password'); // For cracked servers, may need to login
     
@@ -38,7 +38,7 @@ export function createBot(config: BotConfig): Bot {
   });
 
   bot.on('end', () => {
-    console.log('[Bot] Disconnected, reconnecting in 5s...');
+    // console.log('[Bot] Disconnected, reconnecting in 5s...');
     
     // Notify Telegram about disconnect
     if (telegramService) {
@@ -49,7 +49,7 @@ export function createBot(config: BotConfig): Bot {
   });
 
   bot.on('error', (err) => {
-    console.error('[Bot] Error:', err);
+    // console.error('[Bot] Error:', err);
     
     // Notify Telegram about error
     if (telegramService) {
@@ -61,7 +61,7 @@ export function createBot(config: BotConfig): Bot {
   bot.on('chat', (username, message) => {
     if (username === bot.username) return; // Don't log our own messages
     
-    console.log(`[MC Chat] ${username}: ${message}`);
+    // console.log(`[MC Chat] ${username}: ${message}`);
     
     if (telegramService) {
       telegramService.sendMinecraftLog('chat', `${username}: ${message}`);
@@ -70,7 +70,7 @@ export function createBot(config: BotConfig): Bot {
 
   // Listen for player join/leave events
   bot.on('playerJoined', (player) => {
-    console.log(`[MC] ${player.username} joined the game`);
+    // console.log(`[MC] ${player.username} joined the game`);
     
     if (telegramService) {
       telegramService.sendMinecraftLog('join', `${player.username} joined the game`);
@@ -78,7 +78,7 @@ export function createBot(config: BotConfig): Bot {
   });
 
   bot.on('playerLeft', (player) => {
-    console.log(`[MC] ${player.username} left the game`);
+    // console.log(`[MC] ${player.username} left the game`);
     
     if (telegramService) {
       telegramService.sendMinecraftLog('leave', `${player.username} left the game`);
@@ -87,7 +87,7 @@ export function createBot(config: BotConfig): Bot {
 
   // Listen for death messages
   bot.on('death', () => {
-    console.log('[MC] Bot died!');
+    // console.log('[MC] Bot died!');
     
     if (telegramService) {
       telegramService.sendMinecraftLog('death', 'Bot died!');
@@ -96,7 +96,7 @@ export function createBot(config: BotConfig): Bot {
 
   // Listen for kicked events
   bot.on('kicked', (reason) => {
-    console.log(`[MC] Bot was kicked: ${reason}`);
+    // console.log(`[MC] Bot was kicked: ${reason}`);
     
     if (telegramService) {
       telegramService.sendMinecraftLog('info', `Bot was kicked: ${reason}`);
