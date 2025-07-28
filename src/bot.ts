@@ -1,6 +1,7 @@
 import mineflayer, { Bot } from 'mineflayer';
 import { BotConfig } from './config';
 import { setupAfk } from './afk';
+import { setupAutoEat } from './autoeat';
 import { TelegramService } from './telegram';
 
 export function createBot(config: BotConfig): Bot {
@@ -103,6 +104,11 @@ export function createBot(config: BotConfig): Bot {
     }
   });
 
+  // Enable AFK functionality (auto-jump every 30 seconds to prevent being kicked for inactivity)
   setupAfk(bot);
+  
+  // Enable auto-eat functionality (automatically eat food when hunger is low)
+  setupAutoEat(bot);
+  
   return bot;
 } 
